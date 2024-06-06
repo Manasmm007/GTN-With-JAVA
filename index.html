@@ -19,7 +19,7 @@
         document.getElementById('guessForm').addEventListener('submit', function(event) {
             event.preventDefault();
             var guess = parseInt(document.getElementById('guessInput').value);
-            fetch('https://api.github.com/repos/manas007/GTN-With-JAVA/contents/GuessTheNumber.java')
+            fetch('https://api.github.com/repos/manasmm007/GTN-With-JAVA/contents/GuessTheNumber.java')
                 .then(response => response.json())
                 .then(data => {
                     var code = atob(data.content);
