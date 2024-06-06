@@ -25,7 +25,10 @@
                 .then(response => response.json())
                 .then(data => {
                     var code = atob(data.content);
-                    eval(code.replace('public class GuessTheNumber {', 'class GuessTheNumber {'));
+                    var modifiedCode = code.replace('public class GuessTheNumber {', 'class GuessTheNumber {');
+                    var script = document.createElement('script');
+                    script.textContent = modifiedCode;
+                    document.head.appendChild(script);
                     var feedback = GuessTheNumber.main([guess.toString()]);
                     document.getElementById('feedback').textContent = feedback;
                 })
