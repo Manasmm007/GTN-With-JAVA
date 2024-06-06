@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+</head>
+<body>
+    <h1>Welcome to Guess the Number game!</h1>
+    <p>I have picked a number between 1 and 100. Try to guess it!</p>
+    
+    <form id="guessForm">
+        <label for="guessInput">Enter your guess:</label>
+        <input type="number" id="guessInput" required>
+        <button type="submit">Submit Guess</button>
+    </form>
+
+    <script>
+        document.getElementById('guessForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var guess = parseInt(document.getElementById('guessInput').value);
+            fetch('https://api.github.com/repos/manas007/GTN-With-JAVA/contents/GuessTheNumber.java')
+                .then(response => response.json())
+                .then(data => {
+                    var code = atob(data.content);
+                    eval(code.replace('public class GuessTheNumber {', 'class GuessTheNumber {'));
+                    GuessTheNumber.main([guess.toString()]);
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
