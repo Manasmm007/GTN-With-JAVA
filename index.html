@@ -15,6 +15,8 @@
         <button type="submit">Submit Guess</button>
     </form>
 
+    <p id="feedback"></p>
+
     <script>
         document.getElementById('guessForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -24,7 +26,8 @@
                 .then(data => {
                     var code = atob(data.content);
                     eval(code.replace('public class GuessTheNumber {', 'class GuessTheNumber {'));
-                    GuessTheNumber.main([guess.toString()]);
+                    var feedback = GuessTheNumber.main([guess.toString()]);
+                    document.getElementById('feedback').textContent = feedback;
                 })
                 .catch(error => console.error('Error:', error));
         });
